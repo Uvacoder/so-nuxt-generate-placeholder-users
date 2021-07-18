@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -43,4 +45,16 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+  generate: {
+    routes: async () => {
+      const users = await axios.get(
+        'https://jsonplaceholder.typicode.com/users'
+      )
+      return users.data.map((user) => ({
+        route: `/users/${user.id}`,
+        payload: user,
+      }))
+    },
+    fallback: 'no-user.html',
+  },
 }
