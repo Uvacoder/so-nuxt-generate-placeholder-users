@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  asyncData({ payload, redirect }) {
+  asyncData({ payload }) {
     if (payload && Object.entries(payload).length) return { user: payload }
     else return { error: 'This user does not exist' } // this will also can users going to `/users/`
   },
